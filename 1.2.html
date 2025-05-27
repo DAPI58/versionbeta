@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Le jeu de Mazarine, la bobo écolo socialo</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #c8e6c9, #a5d6a7);
+      color: #2e7d32;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    #game-container {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(46, 125, 50, 0.3);
+      max-width: 480px;
+      text-align: center;
+      user-select: none;
+    }
+    h1 {
+      margin-bottom: 10px;
+      font-size: 2.4rem;
+    }
+    #avatar {
+      font-size: 60px;
+      margin-bottom: 15px;
+      animation: bounce 1.5s infinite alternate;
+    }
+    #question {
+      font-size: 1.3rem;
+      margin-bottom: 25px;
+      min-height: 70px;
+      transition: font-size 0.3s ease;
+    }
+    .final-message {
+      font-size: 1.8rem;
+      color: #e91e63;
+      font-weight: bold;
+      margin-top: 35px;
+    }
+    button {
+      background-color: #66bb6a;
+      border: none;
+      padding: 14px 28px;
+      margin: 10px 15px;
+      font-size: 1.1rem;
+      color: white;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    button:hover:not(:disabled) {
+      background-color: #4caf50;
+      transform: scale(1.08);
+    }
+    button:disabled {
+      background-color: #a5d6a7;
+      cursor: default;
+      transform: none;
+    }
+    #result {
+      margin-top: 30px;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #388e3c;
+      min-height: 60px;
+    }
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-15px); }
+    }
+  </style>
+</head>
+<body>
+
+<div id="game-container">
+  <div id="avatar">🌿</div>
+  <h1>Le jeu de Mazarine Ier, la bobo écolo socialo</h1>
+  <p id="question">Mazarine emménage à la campagne pour « se reconnecter à la nature ». Que fait-elle en arrivant ?</p>
+  <button id="btn1">Porte plainte contre le coq du voisin qui chante trop tôt.</button>
+  <button id="btn2">Lance une pétition contre l’odeur des vaches : « c’est oppressant et patriarcal ».</button>
+  <p id="result"></p>
+</div>
+
+<script>
+  const question = document.getElementById('question');
+  const btn1 = document.getElementById('btn1');
+  const btn2 = document.getElementById('btn2');
+  const result = document.getElementById('result');
+
+  let step = 1;
+
+  btn1.onclick = () => handleChoice(1);
+  btn2.onclick = () => handleChoice(2);
+
+  function handleChoice(choice) {
+    if (step === 1) {
+      if (choice === 1) {
+        result.textContent = "Elle voulait la nature… mais version silence Spotify Premium, sans les gens, et sans les bêtes. Le coq, lui, n'a pas été formé à l'écoféminisme et n’a pas lu Libé.";
+      } else {
+        result.textContent = "Les vaches ? Symboles de l’agriculture productiviste masculine, qui pollue et sent fort. Elle propose des sculptures végétales inclusives à la place.";
+      }
+
+      question.textContent = "Mazarine doit affronter sa journée. Pour son café du matin, que fait Mazarine ?";
+      btn1.textContent = "Elle boit un café équitable venu d'Afrique, dans une tasse biodégradable fabriquée à partir de coquilles de noix.";
+      btn2.textContent = "Elle infuse de l'eau de pluie filtrée, parce que le café, ça pollue.";
+      step = 2;
+
+    } else if (step === 2) {
+      if (choice === 1) {
+        result.textContent = `Génial ! Le café a fait 10 000km en avion-cargo, mais comme il est \"éthique\", ça annule tout. Et la tasse en noix ? Importée d'un pays où les enfants bossent... mais en chantant paraît-il. Mazarine.P est fière.`;
+      } else {
+        result.textContent = "Bravo ! Rien de tel qu'un bon goût de zinc de gouttière au réveil. Mazarine.P a filtré l'eau dans une chaussette en lin non genrée. C'est dégueu, mais moralement supérieur.";
+      }
+
+      question.textContent = "Mazarine organise un festival « éco-engagé ». Elle y invite...";
+      btn1.textContent = "Un DJ berlinois et une influenceuse zéro-déchet sponsorisée par L’Oréal.";
+      btn2.textContent = "Des militants antispécistes pour faire fermer la ferme locale.";
+      step = 3;
+
+    } else if (step === 3) {
+      if (choice === 1) {
+        result.textContent = "Avion, hôtel, catering végan à base de produits importés… mais l’intention est propre.";
+      } else {
+        result.textContent = "Fermons les fermes ! Les paysans pourront se reconvertir en médiateurs inclusifs du vivant.";
+      }
+
+      question.textContent = "À la mairie, Mazarine milite pour une transition verte. Sa première idée ?";
+      btn1.textContent = "Interdire les chaudières au fioul, sans proposer d’alternative.";
+      btn2.textContent = "Rendre obligatoire le compost... même en appartement.";
+      step = 4;
+
+    } else if (step === 4) {
+      if (choice === 1) {
+        result.textContent = "Tant pis pour les retraités isolés. Ils n’ont qu’à se chauffer à l’amour et à la conscience climatique.";
+      } else {
+        result.textContent = "Elle a transformé les caves en couveuses à vers. Ça sent l’engagement jusqu’au 3e étage.";
+      }
+
+      question.textContent = "Pour se nourrir localement, Mazarine décide de...";
+      btn1.textContent = "Lancer une AMAP élitiste avec panier à 48€ la semaine.";
+      btn2.textContent = "Cultiver son potager en permaculture... sur du gazon synthétique.";
+      step = 5;
+
+    } else if (step === 5) {
+      if (choice === 1) {
+        result.textContent = "C’est du circuit court... réservé aux comptes bien longs.";
+      } else {
+        result.textContent = "C’est plus instagrammable et ça évite la terre sous les ongles.";
+      }
+
+      question.textContent = "Alors, prêt à partager ta commune avec Mazarine ?";
+      question.classList.add("final-message"); // 👈 agrandit le message final
+      btn1.disabled = true;
+      btn2.disabled = true;
+      step = 6;
+    }
+  }
+</script>
+
+</body>
+</html>
